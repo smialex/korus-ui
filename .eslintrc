@@ -35,7 +35,8 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
 
-    "import/no-extraneous-dependecies": ["error", {"devDependencies": ["**/*.test-old.tsx"]}]
+    // Это строка для того, чтобы не проверялись старые тесты
+    "import/no-extraneous-dependecies": ["error", {"devDependencies": ["**/*.test-old.tsx"]}],
 
     // Не используем дефолтный экспорт
     "import/prefer-default-export": "off",
