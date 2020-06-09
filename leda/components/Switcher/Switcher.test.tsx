@@ -82,7 +82,7 @@ describe('Check Switcher event handler collection', () => {
     const disabled = false;
     const enabled = true;
     const { container } = render(<Switcher name={validName} value={disabled} onChange={onChange}>Switcher</Switcher>);
-    const wrapper = container.querySelectorAll('.switcher-wrapper')[0];    
+    const wrapper = container.querySelectorAll('.switcher-wrapper')[0];
     const label = container.querySelectorAll('.switcher-label')[0];
 
     expect(label)

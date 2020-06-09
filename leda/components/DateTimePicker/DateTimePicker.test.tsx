@@ -130,7 +130,7 @@ describe('Check DateTimePicker attributes test collection', () => {
     const validValue = '10.10.2010 10:10';
     const invalidFormat = 'yyyy-MM-dd hh-mm';
     const invalidValue = '2010-10-10 10-10';
-    const { getByRole, rerender } = render(<DateTimePicker format={validFormat} value={validValue} />);    
+    const { getByRole, rerender } = render(<DateTimePicker format={validFormat} value={validValue} />);
     const input = getByRole('textbox');
 
     expect(input)
