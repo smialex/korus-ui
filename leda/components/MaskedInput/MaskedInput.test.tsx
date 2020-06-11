@@ -135,6 +135,26 @@ describe('Check MaskedInput event handler test collection', () => {
       }));
   });
   test('is MaskedInput onEnterPress event handler work right?', () => {
-    
-  })
+    const onEnterPress = jest.fn();
+    const { getByRole } = render(<MaskedInput onEnterPress={onEnterPress} mask={validMask} name={validName} value={validValue} />);
+    const input = getByRole('textbox');
+
+    fireEvent.keyDown(input, {
+      charCode: 13,
+      code: 13,
+      key: 'Enter',
+      keyCode: 13,
+    });
+
+    expect(onEnterPress)
+      .toHaveBeenCalled();
+
+    expect(onEnterPress)
+      .lastCalledWith(expect.objectContaining({
+        component: expect.objectContaining({
+          name: validName,
+          value: validValue,
+        }),
+      }));
+  });
 });
