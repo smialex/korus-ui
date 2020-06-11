@@ -184,7 +184,7 @@ describe('Check Slider event test collection', () => {
     const validValue = 4;
     const validName = 'test';
     const onChange = jest.fn();
-    const { container } = render(<Slider value={validValue} name={validName} onChange={onChange}/>);
+    const { container } = render(<Slider value={validValue} name={validName} onChange={onChange} />);
     const slider = container.querySelectorAll('.slider-handle')[0];
     const startPosition = { clientX: 5, clientY: 5 };
     const finishPosition = { clientX: 150, clientY: 5 };
