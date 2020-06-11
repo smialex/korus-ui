@@ -7,11 +7,11 @@ import {
 import userEvent from '@testing-library/user-event';
 import { MaskedInput } from './index';
 
-describe('Check MaskedInput snapshots collection', () => {
-  const validMask = '###-###';
-  const validName = 'test';
-  const validValue = '123-123';
+const validMask = '###-###';
+const validName = 'test';
+const validValue = '123-123';
 
+describe('Check MaskedInput snapshots collection', () => {
   test('is MaskedInput render right?', () => {
     const { container } = render(<MaskedInput mask={validMask} name={validName} defaultValue={validValue} />);
 
@@ -20,10 +20,6 @@ describe('Check MaskedInput snapshots collection', () => {
   });
 });
 describe('Check MaskedInput attributes test collection', () => {
-  const validMask = '###-###';
-  const validName = 'test';
-  const validValue = '123-123';
-
   test('is MaskedInput with defaultValue attributes work right?', () => {
     const { getByRole } = render(<MaskedInput mask={validMask} name={validName} defaultValue={validValue} />);
 
@@ -69,10 +65,6 @@ describe('Check MaskedInput attributes test collection', () => {
   });
 });
 describe('Check MaskedInput event handler test collection', () => {
-  const validMask = '###-###';
-  const validName = 'test';
-  const validValue = '123-123';
-
   test('is MaskedInput onChange event handler work right?', () => {
     const onChange = jest.fn();
     const { getByRole } = render(<MaskedInput onChange={onChange} mask={validMask} name={validName} />);
