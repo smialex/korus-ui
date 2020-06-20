@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Collapsible snapshot collection is Collapsible simple mode render right 1`] = `
+<div>
+  <div
+    style="will-change: height; transition: height 250ms cubic-bezier(.4, 0, .2, 1) 0ms; height: 0px; overflow: hidden; visibility: hidden;"
+  >
+    some
+  </div>
+</div>
+`;
