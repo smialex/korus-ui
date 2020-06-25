@@ -64,7 +64,7 @@ describe('Collapsible attributes test collection', () => {
   });
 });
 
-describe('Collapsible events test collection', () => {
+describe('Collapsible events test collection.', () => {
   test('is Collapsible onClose event handler work right?', () => {});
   test('is Collapsible onOpen event handler work right?', () => {});
   test('is Collapsible onToggle event handler work right?', () => {});
