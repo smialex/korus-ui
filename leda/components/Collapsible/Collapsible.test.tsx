@@ -2,24 +2,17 @@
 import React from 'react';
 import {
   render,
-  fireEvent,
-  waitForDomChange,
+
 } from '@testing-library/react';
-
-import { renderHook, act } from '@testing-library/react-hooks';
-import { useCollapsibleManagement } from './useCollapsibleManagement';
-
 import { Collapsible } from './index';
 import { Div } from '../Div/index';
-import { Button } from '../Button/index';
 
 
-const validName = 'name';
 const validText = 'some';
 
 describe('Collapsible snapshot collection', () => {
   test('is Collapsible simple mode render right', () => {
-    const { container, debug } = render(<Collapsible>{validText}</Collapsible>);
+    const { container } = render(<Collapsible>{validText}</Collapsible>);
 
     expect(container)
       .toMatchSnapshot();
@@ -29,7 +22,7 @@ describe('Collapsible snapshot collection', () => {
 describe('Collapsible attributes test collection', () => {
   test('is Collpsible with children working right?', () => {
     const validChildrenClass = 'valid-class';
-    const { container, getByText, debug } = render(<Collapsible><Div className={validChildrenClass}>{validText}</Div></Collapsible>);
+    const { container, getByText } = render(<Collapsible><Div className={validChildrenClass}>{validText}</Div></Collapsible>);
 
     expect(getByText(validText))
       .toBeInTheDocument();
@@ -42,7 +35,7 @@ describe('Collapsible attributes test collection', () => {
     const on = true;
     const off = false;
     const transitionOff = 'none';
-    const { container, getByText, rerender, debug } = render(<Collapsible transition={transitionOff} isOpen={off}>{validText}</Collapsible>);
+    const { getByText, rerender } = render(<Collapsible transition={transitionOff} isOpen={off}>{validText}</Collapsible>);
     const collapsible = getByText(validText);
 
     expect(collapsible)
@@ -55,9 +48,8 @@ describe('Collapsible attributes test collection', () => {
   });
 
   test('is Collapsible with default transition working right?', () => {
-    const on = true;
     const off = false;
-    const { container, getByText, rerender, debug } = render(<Collapsible isOpen={off}>{validText}</Collapsible>);
+    const { getByText } = render(<Collapsible isOpen={off}>{validText}</Collapsible>);
     const collapsible = getByText(validText);
     expect(collapsible)
       .toHaveStyle('transition: height 250ms cubic-bezier(.4, 0, .2, 1) 0ms');
@@ -65,8 +57,7 @@ describe('Collapsible attributes test collection', () => {
 
   test('is Collapsible with custom transition working right?', () => {
     const on = true;
-    const off = false;
-    const { container, getByText, rerender, debug } = render(<Collapsible transition= 'margin-right 4s ease-in-out 1s' isOpen={on}>{validText}</Collapsible>);
+    const { getByText } = render(<Collapsible transition="margin-right 4s ease-in-out 1s" isOpen={on}>{validText}</Collapsible>);
     const collapsible = getByText(validText);
     expect(collapsible)
       .toHaveStyle('transition: margin-right 4s ease-in-out 1s');
