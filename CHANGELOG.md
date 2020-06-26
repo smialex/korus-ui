@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Modify interface for dateTimePicker. TabKeyPressPayload add two constant: isOneMonthInRange, isOneYearInRange
 
-- DropZone isRequired bug fixeds
+- DropZone isRequired bug fixed
 
 ## [0.0.7] - 2020-03-12
 
