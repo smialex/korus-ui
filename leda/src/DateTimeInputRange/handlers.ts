@@ -1,9 +1,10 @@
 import * as React from 'react';
+
 import {
   isFunction, isNil, isDate, isString,
 } from 'lodash';
 import { ChangeEvent, DateTimeInputRefCurrent } from '../DateTimeInput/types';
-import { DateTimeInputRangeProps, DateTimeInputRangeState } from './types';
+import { DateTimeInputRangeProps, DateTimeInputRangeState, DateTimeInputValueType } from './types';
 import { isDateValue } from './helpers';
 import { formatDateTime, stringToDate } from '../DateTimeInput/helpers';
 import { COMPONENT_TYPES } from '../DateTimeInput/constants';
@@ -25,17 +26,17 @@ export const handleErrors = (props: DateTimeInputRangeProps): void => {
   } = props;
 
   if (!isNil(name) && !isString(name) && !isArrayOfTwoStrings(name)) {
-    throw new Error('DateTimeInputRange: name prop must be an array of two strings or a string! '
+    console.warn('DateTimeInputRange: name prop must be an array of two strings or a string! '
      + `You passed: ${Array.isArray(name) ? `${name[0]}, ${name[1]}` : name}`);
   }
 
   if (!isNil(placeholder) && !isString(placeholder) && !isArrayOfTwoStrings(placeholder)) {
-    throw new Error('DateTimeInputRange: placeholder prop must be an array of two strings or a string! '
+    console.warn('DateTimeInputRange: placeholder prop must be an array of two strings or a string! '
      + `You passed: ${Array.isArray(placeholder) ? `${placeholder[0]}, ${placeholder[1]}` : placeholder}`);
   }
 
   if (!isNil(value) && !isArrayOfTwoStrings(value) && !isArrayOfTwoDates(value)) {
-    throw new Error('DateTimeInputRange: value prop must be an array of two strings or two Dates! '
+    console.warn('DateTimeInputRange: value prop must be an array of two strings or two Dates! '
      + `You passed: ${Array.isArray(value) ? `${value[0]}, ${value[1]}` : value}`);
   }
 
@@ -76,7 +77,17 @@ export const createChangeHandler = (
     setDate, date,
   } = state;
 
-  const prevValue = valueProp && !isDateValue(valueProp) ? [stringToDate(valueProp[0], format), stringToDate(valueProp[1], format)] : date;
+  const mainStringToDate = (mainString: DateTimeInputValueType, mainFormat: string | undefined): Date | null => {
+    if (isDate(mainString)) {
+      return mainString;
+    }
+    if (isString(mainString)) {
+      return stringToDate(mainString, mainFormat);
+    }
+    return null;
+  };
+
+  const prevValue = valueProp && !isDateValue(valueProp) ? [mainStringToDate(valueProp[0], format), mainStringToDate(valueProp[1], format)] : date;
 
   const newDate: [Date | null, Date | null] = caller === 'from' ? [ev.component.date, prevValue[1]] : [prevValue[0], ev.component.date];
 

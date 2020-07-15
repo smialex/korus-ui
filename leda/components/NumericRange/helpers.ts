@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import { isString, isBoolean } from 'lodash';
+import { isString, isBoolean, isNumber } from 'lodash';
 import { NumericRangeProps } from './types';
 
 export const getName = (name?: string | [string | undefined, string | undefined]): [string | undefined, string | undefined] => {
@@ -29,10 +29,18 @@ export const getDisabled = (isDisabled?: boolean | [boolean, boolean]): [boolean
   return [false, false];
 };
 
-export const getControlledValue = (value: NumericRangeProps['value']): [number | null, number | null] | undefined => {
-  if (value === undefined) return undefined;
+export const getControlledValue = (value: NumericRangeProps['value']): (number | undefined)[] => {
+  const result: (number | undefined)[] = [];
 
-  if (value === null) return [null, null];
+  if (value && Array.isArray(value)) {
+    value.forEach((item: number | null | undefined) => {
+      result.push(isNumber(item) ? item : undefined);
+    });
+    return [value[0] || undefined, value[1] || undefined];
+  }
+  if (value === undefined) return [undefined, undefined];
+
+  if (value === null) return [undefined, undefined];
 
   return value;
 };

@@ -11,13 +11,15 @@ export interface LabelProps {
 }
 
 export interface NumericRangeState {
-  value: [number | null, number | null],
+  value: (number | null | undefined)[],
 }
+
+export type NumericRangeInputType = undefined | null | number;
 
 export interface RangeChangeEvent {
   component: {
     name?: string | [string | undefined, string | undefined],
-    value: [number | null, number | null],
+    value: [NumericRangeInputType, NumericRangeInputType],
     formattedValue: [string, string],
   },
 }
@@ -69,7 +71,7 @@ export interface NumericRangeProps {
   /** Тема для компонента */
   theme?: PartialGlobalDefaultTheme[typeof COMPONENTS_NAMESPACES.numericRange],
   /** Значение для нумериков ОТ и ДО */
-  value?: [number | null, number | null] | null,
+  value?: [NumericRangeInputType, NumericRangeInputType] | null,
   /** Кастомный рендер для враппера */
   wrapperRender?: CustomRender<NumericRangeProps, NumericRangeState, DivProps>,
   /**  Функция обратного вызова при нажатии Enter */
