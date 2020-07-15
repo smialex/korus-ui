@@ -170,7 +170,7 @@ export const createKeyDownHandler = (
   props: MultiSelectProps, extraData: KeyDownData,
 ): React.KeyboardEventHandler<HTMLInputElement> => (ev) => {
   const {
-    data, textField, filterRule, compareObjectsBy, maxTags,
+    data, textField, filterRule, compareObjectsBy, maxTags, onEnterPress,
   } = props;
 
   const {
@@ -223,6 +223,15 @@ export const createKeyDownHandler = (
   }
 
   if (ev.key === 'Enter') {
+    if (isFunction(onEnterPress)) {
+      onEnterPress({
+        ...ev,
+        component: {
+          value: ev.currentTarget.value,
+          name: props.name,
+        },
+      });
+    }
     if (!highlightedSuggestion) return;
 
     setHighlightedSuggestion(null);

@@ -95,6 +95,13 @@ export interface BlurEvent extends React.FocusEvent<HTMLInputElement> {
   },
 }
 
+export interface EnterPressEvent extends React.KeyboardEvent<HTMLInputElement> {
+  component: {
+    value: string,
+    name?: string,
+  },
+}
+
 export interface AutoCompleteProps<T extends Suggestion = Suggestion> extends ValidationProps {
   /** Браузерное автозаполнение поля ввода, по умолчанию "off" */
   autoComplete?: string,
@@ -156,6 +163,8 @@ export interface AutoCompleteProps<T extends Suggestion = Suggestion> extends Va
   theme?: PartialGlobalDefaultTheme[typeof COMPONENTS_NAMESPACES.autoComplete],
   /** Значение компонента */
   value?: string | null,
+  /** Обработчик нажатия на enter */
+  onEnterPress?: (ev: EnterPressEvent) => void,
   /** Классы переданные через _ */
   [x: string]: unknown,
 }

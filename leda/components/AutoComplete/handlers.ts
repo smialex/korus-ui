@@ -229,6 +229,7 @@ export const inputKeyDownHandlerCreator = ({
   const {
     onChange,
     onKeyDown,
+    onEnterPress,
     name,
     placeholder,
     textField,
@@ -270,6 +271,16 @@ export const inputKeyDownHandlerCreator = ({
   }
 
   if (event.key === 'Enter') {
+    if (isFunction(onEnterPress)) {
+      onEnterPress({
+        ...event,
+        component: {
+          value: event.currentTarget.value,
+          name: props.name,
+        },
+      });
+    }
+
     if (highlightedSuggestion == null) {
       // the input field is focused and nothing is chosen in the dropdown list
       // do nothing
