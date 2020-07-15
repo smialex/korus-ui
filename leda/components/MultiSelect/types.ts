@@ -66,7 +66,7 @@ export interface BlurEvent<T = Value> extends React.FocusEvent<HTMLInputElement>
 export interface EnterPressEvent<T = Value> extends React.KeyboardEvent<HTMLInputElement> {
   component: {
     name?: string,
-    value: T[],
+    value: T[] | string,
   },
 }
 
@@ -153,6 +153,7 @@ export interface MultiSelectProps<T extends MultiSelectValue | null | undefined 
   /** Кастомный рендер враппера */
   wrapperRender?: CustomRender<MultiSelectProps, MultiSelectState, DivProps>,
   /** Классы переданные через _ */
+  onEnterPress?: (ev: EnterPressEvent) => void,
   [x: string]: unknown,
 }
 

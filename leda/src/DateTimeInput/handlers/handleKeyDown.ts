@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { isNil, isFunction } from 'lodash';
 import { VIEW_TYPES } from '../../Calendar/constants';
-import { isDateGreater, isDateLess } from '../../Calendar/helpers';
+import { isDateGreater, isDateLess, getNormalizedValue } from '../../Calendar/helpers';
 import {
   setDate, setOpen, setViewDate, setViewType,
 } from '../actions';
@@ -236,25 +236,40 @@ const handleEnterKeyPress = (payload: EnterKeyPressPayload): void => {
   const {
     year, month,
   } = dateShorthand;
+
+  const normalizedDateValue = getNormalizedValue(date, min, max, type);
+
   // если календарь закрыт - вызывать onEnterPress
   if (!isOpen) {
+    dispatch(setDate(normalizedDateValue));
+
     if (isFunction(onEnterPress)) {
       onEnterPress({
         ...ev,
         component: {
-          date,
+          date: normalizedDateValue,
           name,
-          value,
+          value: formatDateTime(normalizedDateValue, format),
         },
       });
     }
-
+    if (isFunction(onChange)) {
+      onChange({
+        ...ev,
+        component: {
+          value: formatDateTime(normalizedDateValue, format),
+          name,
+          date: normalizedDateValue,
+        },
+      });
+    }
     return;
   }
 
   const updateDate = (newDate: Date): void => {
     // неконтролируемый режим
     dispatch(setDate(newDate));
+
     // контролируемый режим
     if (isFunction(onChange)) {
       onChange({

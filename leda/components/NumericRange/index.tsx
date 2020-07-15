@@ -29,6 +29,7 @@ export const NumericRange = React.forwardRef((props: NumericRangeProps, ref?: Re
     name: nameProp,
     onBlur,
     onChange,
+    onEnterPress,
     onFocus,
     placeholder: placeholderProp,
     shouldTrimTrailingZeros,
@@ -40,7 +41,8 @@ export const NumericRange = React.forwardRef((props: NumericRangeProps, ref?: Re
     ...restProps
   } = useProps(props);
   // вернет value из props или value из state, функция setUncontrolledState сработает только в неконтролируемом режиме
-  const [value, setUncontrolledValue] = useValue<NumericRangeState['value']>(getControlledValue(valueProp), [null, null]);
+  const [value, setUncontrolledValue] = useValue<NumericRangeState['value']>(getControlledValue(valueProp), [undefined, undefined]);
+
 
   const theme = useTheme(themeProp, COMPONENTS_NAMESPACES.numericRange);
 
@@ -106,6 +108,7 @@ export const NumericRange = React.forwardRef((props: NumericRangeProps, ref?: Re
         max={isNil(value[1]) ? max : value[1]}
         min={min}
         name={name[0]}
+        onEnterPress={onEnterPress}
         onChange={handleChange('from')}
         placeholder={placeholder[0]}
         theme={theme.to}
@@ -120,6 +123,7 @@ export const NumericRange = React.forwardRef((props: NumericRangeProps, ref?: Re
         max={max}
         min={isNil(value[0]) ? min : value[0]}
         name={name[1]}
+        onEnterPress={onEnterPress}
         onChange={handleChange('to')}
         placeholder={placeholder[1]}
         theme={theme.from}
