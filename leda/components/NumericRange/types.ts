@@ -19,7 +19,7 @@ export type NumericRangeInputType = undefined | null | number;
 export interface RangeChangeEvent {
   component: {
     name?: string | [string | undefined, string | undefined],
-    value: [NumericRangeInputType, NumericRangeInputType],
+    value: [null | number, null | number],
     formattedValue: [string, string],
   },
 }
