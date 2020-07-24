@@ -59,6 +59,7 @@ export const MultiSelect = React.forwardRef((props: MultiSelectProps, ref: React
     onBlur,
     onChange,
     onFocus,
+    onEnterPress,
     placeholder,
     requiredMessage,
     selectAllItemRender,
