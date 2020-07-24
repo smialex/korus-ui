@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 - NumericRange. Fixed RangeChangeEvent type
+- onEnterPress event. Fixed warning message
 - DateTimeInput. Bug fixed with selecting a date by keydown "enter" in component with prop "isOpen"
 - DropDownSelect. Fixed bug with uncorrectly behavior on press "enter"
 - FileDrop. isRequired bug fixed

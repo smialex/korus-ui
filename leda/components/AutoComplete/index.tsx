@@ -61,6 +61,7 @@ export const AutoComplete = React.forwardRef((props: AutoCompleteProps, ref: Rea
     onBlur,
     onChange,
     onFocus,
+    onEnterPress,
     onKeyDown,
     placeholder,
     requiredMessage,
