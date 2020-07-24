@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- DateTimeInput. Bug fixed with selecting a date by keydown "enter" in component with prop "isOpen"
 - DropDownSelect. Fixed bug with uncorrectly behavior on press "enter"
 - FileDrop. isRequired bug fixed
 
