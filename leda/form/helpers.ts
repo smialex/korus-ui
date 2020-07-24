@@ -1,5 +1,5 @@
 import {
-  isArray, isFunction, isRegExp, isString,
+  isArray, isFunction, isRegExp, isString, isNull,
 } from 'lodash';
 import { PREDEFINED_VALIDATORS } from '../components/Validation/predefinedValidators';
 import {
@@ -10,6 +10,11 @@ import {
 // todo: check is working for all components
 export const checkIsFilled = (value: any): boolean => {
   if (value == null) {
+    return false;
+  }
+
+  // FileDrop
+  if (value.error && !isNull(value.error)) {
     return false;
   }
 
