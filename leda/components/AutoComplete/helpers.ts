@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {
   every, isArray, isFunction, isObject, isString,
 } from 'lodash';
@@ -138,14 +137,14 @@ export const correctValue = ({
   setStateValue,
   value,
 }: {
-  event: React.FocusEvent<HTMLInputElement>,
+  event: React.SyntheticEvent,
   isValueControlled: boolean,
   lastCorrectValue: string,
   props: AutoCompleteProps,
   setLastCorrectValue: (val: string) => void,
   setStateValue: (val: string) => void,
   value?: string | null,
-}): void => {
+}): string => {
   // если value нет в data
   // использовать последнее корректное (есть в списке data, или пустое) value
   const {
@@ -165,24 +164,23 @@ export const correctValue = ({
   if (value === '' || dataIncludesValue) {
     setLastCorrectValue(value || '');
   } else {
-    const newValue = lastCorrectValue;
-
     if (isFunction(onChange)) {
-      const suggestion = getSuggestionFromValue({ data, value: newValue, textField });
-
-      const customEvent: ChangeEvent = {
+      const suggestion = getSuggestionFromValue({ data, value: lastCorrectValue, textField });
+      const customEvent = {
         ...event,
         component: {
           method: CHANGE_METHOD.trigger,
           name,
           suggestion,
-          value: newValue,
+          value: lastCorrectValue,
         },
-      };
+      } as ChangeEvent;
 
-      if (isFunction(onChange)) onChange(customEvent);
+      onChange(customEvent);
     }
-
     if (!isValueControlled) setStateValue(lastCorrectValue);
+
+    return lastCorrectValue;
   }
+  return value || '';
 };
