@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 - onEnterPress event. Fixed warning message
+- DropDownSelect. Fixed bug with uncorrectly behavior on press "enter"
 
 
 ## [0.26.0] - 2020-07-15
