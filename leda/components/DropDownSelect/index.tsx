@@ -55,6 +55,7 @@ export const DropDownSelect = React.forwardRef((props: DropDownSelectProps, ref:
     onChange,
     onFilterChange,
     onFocus,
+    onEnterPress,
     placeholder,
     requiredMessage,
     searchFields,

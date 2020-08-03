@@ -48,6 +48,7 @@ export const Password = React.forwardRef((props: PasswordProps, ref: React.Ref<P
     passwordVisibilityRender,
     requiredMessage,
     shouldValidateUnmounted,
+    showEvaluationMessage = true,
     validationMessageRender,
     validator,
     wrapperRender,
@@ -174,7 +175,7 @@ export const Password = React.forwardRef((props: PasswordProps, ref: React.Ref<P
           onIconClick={handlePasswordVisibilityClick}
         />
       </Div>
-      {isValid && (
+      {showEvaluationMessage && isValid && (
         <PasswordMessage
           value={value}
           theme={theme}

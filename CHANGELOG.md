@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 
+## [0.27.0] - 2020-08-03
+
+### Added
+- Password. Added showEvaluationMessage prop to hide evaluation messages
+- Textarea. shouldAutoResize prop - automatically adjust vertical height when required.
+
+### Fixed
+- NumericRange. Fixed RangeChangeEvent type
+- Autocomplete onEnterPress event. Fixed warning message
+- DateTimeInput. Bug fixed with selecting a date by keydown "enter" in component with prop "isOpen"
+- DropDownSelect. Fixed bug with uncorrectly behavior on press "enter"
+- FileDrop. isRequired bug fixed
+- MaskedInput. Fixed bug with incorrectly cursor position when typing same chars
+- Autocomplete. Change value on Enter press only if suggestions list is open
+
+
 ## [0.26.0] - 2020-07-15
 
 ### Added
@@ -19,6 +35,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - TourItem: overlayBackgroundColor prop is removed. "tour-overlay" class with "fill" attribute used to change background color
 
+- TourItem overlayBackgroundColor prop is removed. "tour-overlay" class with "fill" attribute used to change background color
+- Added "form" and "name" props checker for input components
+(Input, DateTimeInput, DateTimeInputRange, TextArea, AutoComplete, ButtonGroup, DropZone, FileDrop, MaskedInput, MultiSelect, NumericRange, CheckBox, Password, Switcher, NumericTextBox)
 
 ## [0.25.0] - 2020-07-02
 - Datepicker: month names changed
