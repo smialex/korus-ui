@@ -49,6 +49,8 @@ export interface FocusEvent extends React.FocusEvent<HTMLInputElement> {
   },
 }
 
+export type TimeLimits = [number, number];
+
 export interface DateTimeInputProps extends ValidationProps {
   /** Ссылка на контейнер, относительно которого нужно позиционировать элемент */
   boundingContainerRef?: React.RefObject<HTMLElement | { wrapper: HTMLElement }>,
@@ -68,6 +70,10 @@ export interface DateTimeInputProps extends ValidationProps {
   max?: Date,
   /** Минимальная дата */
   min?: Date,
+  /** Минимальное время */
+  timeMin?: TimeLimits,
+  /** Максимальное время */
+  timeMax?: TimeLimits,
   /** Имя компонента */
   name?: string,
   /** Обработчик блюра */
@@ -164,6 +170,8 @@ export interface EnterKeyPressPayload {
   isOpen: DateTimeInputProps['isOpen'],
   max: DateTimeInputProps['max'],
   min: DateTimeInputProps['min'],
+  timeMax: DateTimeInputProps['timeMax'],
+  timeMin: DateTimeInputProps['timeMin'],
   name: DateTimeInputProps['name'],
   onChange: DateTimeInputProps['onChange'],
   onEnterPress: DateTimeInputProps['onEnterPress'],

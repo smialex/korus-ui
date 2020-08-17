@@ -138,9 +138,7 @@ describe('Input ATTRIBUTES', () => {
       <Input onChange={handleChange} maxLength={5} onBlur={jest.fn()} />
     ));
 
-    userEvent.type(screen.getByRole('textbox'), 'new value', {
-      allAtOnce: true,
-    });
+    userEvent.type(screen.getByRole('textbox'), 'new value');
 
     expect(handleChange).lastCalledWith(eventMatcher);
   });

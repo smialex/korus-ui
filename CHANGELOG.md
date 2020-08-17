@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 
+
+## [0.28.0] - 2020-08-17
+
+### Fixed
+- DropDownSelect: Unable to choose 0 as a value from SuggestionList
+- DropDownSelect: Incorrect component behavior on Enter press. Should clear value, show placeholder and hide clear button.
+- DateTimePicker, TimePicker: Fixed timeMax timeMin limits. Time limiting works correctly.
+- DropDownSelect: Should select highlighted value on Enter press. Bug was actual when 'data' is an array of objects.
+- Input: Incorrect text input behavior with maxLength prop.
+
+
 ## [0.27.0] - 2020-08-03
 
 ### Added
