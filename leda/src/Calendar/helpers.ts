@@ -1,3 +1,4 @@
+import isDate from 'lodash/isDate';
 import { Values } from '../../commonTypes';
 import { getClassNames } from '../../utils';
 import { BUTTON_TYPE, CALENDAR_CLICK_ACTION, VIEW_TYPES } from './constants';
@@ -53,15 +54,28 @@ export const isDateGreater = (firstDate?: Date | null, secondDate?: Date | null)
   return firstWithoutTime.getTime() > secondWithoutTime.getTime();
 };
 
-export const getFirstDecadeYear = (viewDate: Date): number => Math.floor(viewDate.getFullYear() / 10) * 10;
+/* Round date to day start */
+export const getRoundDate = (date: Date): Date => new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
-export const isDatesEqual = (firstDate: Date, secondDate: Date): boolean => {
-  const firstWithoutTime = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
+/* Compare two dates without time */
+export const isDatesEqual = (firstDate: Date, secondDate: Date): boolean => getRoundDate(firstDate).getTime() === getRoundDate(secondDate).getTime();
 
-  const secondWithoutTime = new Date(secondDate.getFullYear(), secondDate.getMonth(), secondDate.getDate());
+/* Check if date is one of disabledDates */
+export const getIsDateDisabled = (date: Date, disabledDates?: (Date | [Date, Date])[]): boolean => {
+  const dateTime = getRoundDate(date).getTime();
 
-  return firstWithoutTime.getTime() === secondWithoutTime.getTime();
+  if (!Array.isArray(disabledDates)) return false;
+
+  return disabledDates.some((dates) => {
+    if (isDate(dates)) return getRoundDate(dates).getTime() === dateTime;
+    if (Array.isArray(dates)) {
+      return getRoundDate(dates[0]).getTime() <= dateTime && getRoundDate(dates[1]).getTime() >= dateTime;
+    }
+    return false;
+  });
 };
+
+export const getFirstDecadeYear = (viewDate: Date): number => Math.floor(viewDate.getFullYear() / 10) * 10;
 
 export const getMonthYearArray = (props?: MonthViewProps | YearViewProps): number[][] => {
   const array = [];
@@ -272,7 +286,14 @@ export const getCalendarConditions = (props: CalendarConditionProps): CalendarCo
 
 export const getDateCellConditions = (props: DateCellProps): DateCellConditions => {
   const {
-    dates, date, index, weekIndex = 0, viewDate, min, max,
+    date,
+    dates,
+    disabledDates,
+    index,
+    max,
+    min,
+    viewDate,
+    weekIndex = 0,
   } = props;
 
   const firstDayOfMonth = dates[0].indexOf(1);
@@ -297,8 +318,11 @@ export const getDateCellConditions = (props: DateCellProps): DateCellConditions 
   const isDateOutOfMinMonthRange = !!min && renderedDate < new Date(min.getFullYear(), min.getMonth(), min.getDate());
   const isDateOutOfMaxMonthRange = !!max && renderedDate > new Date(max.getFullYear(), max.getMonth(), max.getDate());
 
+  const isDateDisabled = getIsDateDisabled(renderedDate, disabledDates);
+
   return {
     firstDayOfMonth,
+    isDateDisabled,
     isDateOfNextMonth,
     isDateOfPrevMonth,
     isDateOutOfMaxMonthRange,
