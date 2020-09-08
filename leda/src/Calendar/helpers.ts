@@ -12,6 +12,8 @@ import {
   DateCellProps,
   MonthViewProps,
   YearViewProps,
+  MonthsNames,
+  WeekDayNames,
 } from './types';
 
 export const isTimeLess = (firstDate?: Date | null, secondDate?: Date | null): boolean => {
@@ -134,7 +136,7 @@ export const getMonthDays = (month: number, year: number): number[][] => {
 };
 
 
-export const getMonthName = (month: number): string => {
+export const getMonthName = (month: number, monthNames?: MonthsNames): string => {
   const months = [
     'Январь',
     'Февраль',
@@ -150,10 +152,14 @@ export const getMonthName = (month: number): string => {
     'Декабрь',
   ];
 
+  if (monthNames) {
+    return monthNames[month];
+  }
+
   return months[month];
 };
 
-export const getShortMonthName = (month: number): string => {
+export const getShortMonthName = (month: number, shortMonthNames?: MonthsNames): string => {
   const months = [
     'янв.',
     'февр.',
@@ -169,10 +175,14 @@ export const getShortMonthName = (month: number): string => {
     'дек.',
   ];
 
+  if (shortMonthNames) {
+    return shortMonthNames[month];
+  }
+
   return months[month];
 };
 
-export const getShortWeekDayName = (number: number): string => {
+export const getShortWeekDayName = (number: number, shortWeekDayNames?: WeekDayNames): string => {
   const weekDays = [
     'Пн',
     'Вт',
@@ -183,10 +193,14 @@ export const getShortWeekDayName = (number: number): string => {
     'Вс',
   ];
 
+  if (shortWeekDayNames) {
+    return shortWeekDayNames[number];
+  }
+
   return weekDays[number];
 };
 
-export const getWeekDayName = (number: number): string => {
+export const getWeekDayName = (number: number, weekDayNames?: WeekDayNames): string => {
   const weekDays = [
     'Понедельник',
     'Вторник',
@@ -197,12 +211,16 @@ export const getWeekDayName = (number: number): string => {
     'Воскресенье',
   ];
 
+  if (weekDayNames) {
+    return weekDayNames[number];
+  }
+
   return weekDays[number];
 };
 
-export const getCalendarTitle = (viewDate: Date, viewType: Values<typeof VIEW_TYPES>): string => {
+export const getCalendarTitle = (viewDate: Date, viewType: Values<typeof VIEW_TYPES>, monthNames?: MonthsNames): string => {
   if (viewType === VIEW_TYPES.DATES) {
-    return `${getMonthName(viewDate.getMonth())} ${viewDate.getFullYear()}`;
+    return `${getMonthName(viewDate.getMonth(), monthNames)} ${viewDate.getFullYear()}`;
   }
 
   if (viewType === VIEW_TYPES.MONTHS) {
