@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.30.0] - 2020-09-14
 
+### Added
+- DatePicker: Added tests for max, min attributes and onEnterPress event
 
 ## [0.29.0] - 2020-08-31
 
