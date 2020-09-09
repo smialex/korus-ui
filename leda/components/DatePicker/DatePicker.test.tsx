@@ -15,7 +15,7 @@ const invalidValue = '2010-10-10';
 
 
 describe('DatePicker snapshots collection', () => {
-  test('is DatePicker render right?', () => {
+  test('is DatePicker rendering right?', () => {
     const { container } = render(<DatePicker name={validName} />);
 
     expect(container.firstChild)
@@ -33,7 +33,7 @@ describe('DatePicker attributes test collection', () => {
     expect(getByRole('textbox'))
       .toHaveProperty('placeholder', validPlaceholder);
   });
-  test('is Datepicker work right witn minMax set attributes?', () => {
+  test('is Datepicker working right with minMax set attributes?', () => {
     const min = new Date('01.02.2018');
     const max = new Date('05.25.2020');// mm-dd-YYYY
     const validDate = '25.05.2020';
@@ -43,7 +43,59 @@ describe('DatePicker attributes test collection', () => {
     expect(getByText(valueForCheck))
       .toHaveClass('calendar-date-cell disabled-date');
   });
-  test('is Datepicker work right with isDisabled attributes?', () => {
+  test('is Datepicker working right with max set attribute and onPressEnter event listener?', () => {
+    const max = new Date('05.25.2020');// mm-dd-YYYY
+    const invalidDate = '26.05.2020';
+    const validDate = '25.05.2020';
+    const onChange = jest.fn();
+    const { container } = render(<DatePicker name={validName} value={invalidDate} max={max} onChange={onChange} />);
+    const input = container.querySelectorAll('input.datepicker-input')[0];
+
+    fireEvent.keyDown(input, {
+      charCode: 13,
+      code: 13,
+      key: 'Enter',
+      keyCode: 13,
+    });
+
+    expect(onChange)
+      .toHaveBeenCalledTimes(1);
+
+    expect(onChange)
+      .lastCalledWith(expect.objectContaining({
+        component: expect.objectContaining({
+          name: validName,
+          value: validDate,
+        }),
+      }));
+  });
+  test('is Datepicker working right with min set attribute and onPressEnter event listener?', () => {
+    const min = new Date('01.02.2018');// mm-dd-YYYY
+    const invalidDate = '01.01.2018';
+    const validDate = '02.01.2018';
+    const onChange = jest.fn();
+    const { container } = render(<DatePicker name={validName} value={invalidDate} min={min} onChange={onChange} />);
+    const input = container.querySelectorAll('input.datepicker-input')[0];
+
+    fireEvent.keyDown(input, {
+      charCode: 13,
+      code: 13,
+      key: 'Enter',
+      keyCode: 13,
+    });
+
+    expect(onChange)
+      .toHaveBeenCalledTimes(1);
+
+    expect(onChange)
+      .lastCalledWith(expect.objectContaining({
+        component: expect.objectContaining({
+          name: validName,
+          value: validDate,
+        }),
+      }));
+  });
+  test('is Datepicker working right with isDisabled attributes?', () => {
     const onChange = jest.fn();
     const { container } = render(<DatePicker isDisabled value={validValue} onChange={onChange} />);
     const icon = container.querySelectorAll('.datepicker-icons-wrapper')[0];
@@ -60,7 +112,7 @@ describe('DatePicker attributes test collection', () => {
     expect(onChange)
       .toHaveBeenCalledTimes(0);
   });
-  test('is Datepicker work right with isOpen attribute?', () => {
+  test('is Datepicker working right with isOpen attribute?', () => {
     const onChange = jest.fn();
     const { container, rerender } = render(<DatePicker isOpen value={validValue} onChange={onChange} />);
     const icon = container.querySelectorAll('.datepicker-icons-wrapper')[0];
@@ -82,7 +134,7 @@ describe('DatePicker attributes test collection', () => {
       .not
       .toBeDefined();
   });
-  test('is Datepicker work right with date format input?', () => {
+  test('is Datepicker working right with date format input?', () => {
     const onChange = jest.fn();
     const { container, rerender } = render(<DatePicker format={validFormat} value={validValue} onChange={onChange} />);
     const icon = container.querySelectorAll('.datepicker-icons-wrapper')[0];
@@ -102,7 +154,7 @@ describe('DatePicker attributes test collection', () => {
   });
 });
 describe('Datepicker event listeners test collection', () => {
-  test('is Datepicker work right with onBlur event listener?', () => {
+  test('is Datepicker working right with onBlur event listener?', () => {
     const onBlur = jest.fn();
     const { container } = render(<DatePicker value={validValue} name={validName} onBlur={onBlur} />);
     const input = container.querySelectorAll('input.datepicker-input')[0];
@@ -124,7 +176,7 @@ describe('Datepicker event listeners test collection', () => {
         }),
       }));
   });
-  test('is Datepicker work right with onChange event listener?', () => {
+  test('is Datepicker working right with onChange event listener?', () => {
     const validValueWithoutComma = '10101010';
     const onChange = jest.fn();
     const { container } = render(<DatePicker value={invalidValue} format={validFormat} name={validName} onChange={onChange} />);
@@ -143,7 +195,7 @@ describe('Datepicker event listeners test collection', () => {
         }),
       }));
   });
-  test('is Datepicker work right with onPressEnter event listener?', () => {
+  test('is Datepicker working right with onPressEnter event listener?', () => {
     const onEnterPress = jest.fn();
     const { container } = render(<DatePicker name={validName} value={validValue} onEnterPress={onEnterPress} />);
     const input = container.querySelectorAll('input.datepicker-input')[0];
@@ -166,7 +218,7 @@ describe('Datepicker event listeners test collection', () => {
         }),
       }));
   });
-  test('is Datepicker work right with onFocus event listener?', () => {
+  test('is Datepicker working right with onFocus event listener?', () => {
     const onFocus = jest.fn();
     const { container } = render(<DatePicker name={validName} value={validValue} onFocus={onFocus} />);
     const input = container.querySelectorAll('input.datepicker-input')[0];
@@ -186,7 +238,7 @@ describe('Datepicker event listeners test collection', () => {
   });
 });
 describe('DatePicker quality set test collection', () => {
-  test('is DatePicker render right if value set as String', () => {
+  test('is DatePicker rendering right if value set as String', () => {
     const dateValue = '10.10.2010';
     const {
       getAllByRole,
@@ -202,7 +254,7 @@ describe('DatePicker quality set test collection', () => {
     expect(getByRole('textbox'))
       .toHaveValue(dateValue);
   });
-  test('is DatePicker render right if value set as Date', () => {
+  test('is DatePicker rendering right if value set as Date', () => {
     const dateValue = new Date('10.10.2010');
     const {
       getAllByRole,
@@ -218,7 +270,7 @@ describe('DatePicker quality set test collection', () => {
     expect(getByRole('textbox'))
       .toHaveValue('10.10.2010');
   });
-  test('is DatePicker render right if value set as Null', () => {
+  test('is DatePicker rendering right if value set as Null', () => {
     const dateValue = null;
     const {
       getAllByRole,
