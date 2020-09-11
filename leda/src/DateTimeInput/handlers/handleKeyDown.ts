@@ -229,8 +229,24 @@ const handleDownKeyPress = (payload: UpDownKeyPressPayload): void => {
 
 const handleEnterKeyPress = (payload: EnterKeyPressPayload): void => {
   const {
-    isOpen, onEnterPress, ev, name, date, value, viewType,
-    viewDate, type, dateShorthand, min, max, format = 'dd.MM.yyyy', dispatch, onChange, maskedInputRef, timeMin, timeMax,
+    date,
+    dateShorthand,
+    dispatch,
+    ev,
+    format = 'dd.MM.yyyy',
+    isOpen,
+    maskedInputRef,
+    max,
+    min,
+    name,
+    onChange,
+    onEnterPress,
+    outputFormat,
+    timeMax,
+    timeMin,
+    type,
+    viewDate,
+    viewType,
   } = payload;
 
   const {
@@ -249,7 +265,7 @@ const handleEnterKeyPress = (payload: EnterKeyPressPayload): void => {
         component: {
           date: normalizedDateValue,
           name,
-          value: formatDateTime(normalizedDateValue, format),
+          value: formatDateTime(normalizedDateValue, outputFormat ?? format),
         },
       });
     }
@@ -257,9 +273,9 @@ const handleEnterKeyPress = (payload: EnterKeyPressPayload): void => {
       onChange({
         ...ev,
         component: {
-          value: formatDateTime(normalizedDateValue, format),
-          name,
           date: normalizedDateValue,
+          name,
+          value: formatDateTime(normalizedDateValue, outputFormat ?? format),
         },
       });
     }
@@ -275,9 +291,9 @@ const handleEnterKeyPress = (payload: EnterKeyPressPayload): void => {
       onChange({
         ...ev,
         component: {
-          name,
           date: newDate,
-          value: formatDateTime(newDate, format) || '',
+          name,
+          value: formatDateTime(newDate, outputFormat ?? format) || '',
         },
       });
     }
@@ -404,7 +420,16 @@ export const createKeyDownHandler = ({
   } = state;
 
   const {
-    min, max, onEnterPress, type, name, format, onChange, timeMin, timeMax,
+    format,
+    max,
+    min,
+    name,
+    onChange,
+    onEnterPress,
+    outputFormat,
+    timeMax,
+    timeMin,
+    type,
   } = props;
 
   const {
@@ -452,8 +477,25 @@ export const createKeyDownHandler = ({
     }
     case KEYS.ENTER: {
       handleEnterKeyPress({
-        dateShorthand, ev, isOpen, max, min, viewType, onEnterPress, name, date, type, value, viewDate,
-        dispatch, format, onChange, maskedInputRef, timeMin, timeMax,
+        date,
+        dateShorthand,
+        dispatch,
+        ev,
+        format,
+        isOpen,
+        maskedInputRef,
+        max,
+        min,
+        name,
+        onChange,
+        onEnterPress,
+        outputFormat,
+        timeMin,
+        timeMax,
+        type,
+        value,
+        viewDate,
+        viewType,
       });
       break;
     }

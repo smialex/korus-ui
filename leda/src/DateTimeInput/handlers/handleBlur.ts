@@ -20,7 +20,16 @@ export const createBlurHandler = ({
   } = state;
 
   const {
-    min, max, onChange, format = 'dd.MM.yyyy', name, type, onBlur, timeMin, timeMax,
+    format = 'dd.MM.yyyy',
+    max,
+    min,
+    name,
+    onBlur,
+    onChange,
+    outputFormat,
+    timeMax,
+    timeMin,
+    type,
   } = props;
 
   dispatch(setFocused(false));
@@ -36,9 +45,9 @@ export const createBlurHandler = ({
     onChange({
       ...ev,
       component: {
-        value: formatDateTime(normalizedDateValue, format),
-        name,
         date: normalizedDateValue,
+        name,
+        value: formatDateTime(normalizedDateValue, outputFormat ?? format),
       },
     });
   }
@@ -49,10 +58,10 @@ export const createBlurHandler = ({
     onBlur({
       ...ev,
       component: {
-        value: formatDateTime(normalizedDateValue, format),
-        name,
         date: normalizedDateValue,
         isValid,
+        name,
+        value: formatDateTime(normalizedDateValue, outputFormat ?? format),
       },
     });
   }

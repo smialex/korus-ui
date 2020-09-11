@@ -1,4 +1,5 @@
 import { isFunction } from 'lodash';
+import { formatDateTime } from '../helpers';
 import { setFocused } from '../actions';
 import {
   HandlersData,
@@ -7,7 +8,11 @@ import { FocusEvent } from '../../MaskedInputBase/types';
 
 
 export const createFocusHandler = ({ props, state, dispatch }: HandlersData) => (ev: FocusEvent): void => {
-  const { onFocus, name } = props;
+  const {
+    name,
+    onFocus,
+    outputFormat,
+  } = props;
   const { date } = state;
 
   dispatch(setFocused(true));
@@ -16,9 +21,9 @@ export const createFocusHandler = ({ props, state, dispatch }: HandlersData) => 
     onFocus({
       ...ev,
       component: {
-        name,
         date,
-        value: ev.component.value,
+        name,
+        value: outputFormat ? formatDateTime(date, outputFormat) : ev.component.value,
       },
     });
   }
