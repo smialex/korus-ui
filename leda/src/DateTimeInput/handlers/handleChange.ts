@@ -13,6 +13,7 @@ export const createChangeHandler = ({ props, dispatch }: HandlersData) => (ev: C
     format = 'dd.MM.yyyy',
     name,
     onChange,
+    outputFormat,
     type = COMPONENT_TYPES.DATE_ONLY,
   } = props;
 
@@ -37,14 +38,16 @@ export const createChangeHandler = ({ props, dispatch }: HandlersData) => (ev: C
     dispatch(setDate(null));
   }
 
+  const outputValue: string = outputFormat == null ? ev.component.value : formatDateTime(newDate, outputFormat);
+
   // контролируемый режим
   if (isFunction(onChange)) {
     onChange({
       ...ev,
       component: {
-        name,
         date: newDate,
-        value: ev.component.value,
+        name,
+        value: outputValue,
       },
     });
   }

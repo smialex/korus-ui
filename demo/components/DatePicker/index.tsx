@@ -5,6 +5,7 @@ import { ControlledDate } from './ControlledDate';
 import { DisabledDates } from './DisabledDates';
 import { MinMax } from './MinMax';
 import { Customization } from './Customization';
+import { OutputFormat } from './OutputFormat';
 import { Positioned } from './Positioned';
 import { Controlled } from './Controlled';
 
@@ -16,6 +17,7 @@ export const DatePicker = () => (
     <MinMax title="Ограничение даты min-max" />
     <Customization title="Кастомизация" />
     <DisabledDates title="Disabled dates" />
+    <OutputFormat title="Output format" />
     <Positioned title="Позиционирование" />
   </Story>
 );

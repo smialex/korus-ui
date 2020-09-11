@@ -84,6 +84,8 @@ export interface DateTimeInputProps extends ValidationProps {
   onEnterPress?: (ev: ChangeEvent) => void,
   /** Обработчик фокуса */
   onFocus?: (ev: FocusEvent) => void,
+  /** Output value date format */
+  outputFormat?: string,
   /** Плейсхолдер инпута */
   placeholder?: string,
   /** Тема для компонента */
@@ -180,18 +182,19 @@ export interface EnterKeyPressPayload {
   ev: React.KeyboardEvent<HTMLDivElement>,
   format: DateTimeInputProps['format'],
   isOpen: DateTimeInputProps['isOpen'],
+  maskedInputRef: React.MutableRefObject<HTMLInputElement | null>,
   max: DateTimeInputProps['max'],
   min: DateTimeInputProps['min'],
-  timeMax: DateTimeInputProps['timeMax'],
-  timeMin: DateTimeInputProps['timeMin'],
   name: DateTimeInputProps['name'],
   onChange: DateTimeInputProps['onChange'],
   onEnterPress: DateTimeInputProps['onEnterPress'],
+  outputFormat?: string,
+  timeMax: DateTimeInputProps['timeMax'],
+  timeMin: DateTimeInputProps['timeMin'],
   type: DateTimeInputProps['type'],
   value: DateTimeInputState['value'],
   viewDate: DateTimeInputState['viewDate'],
   viewType: DateTimeInputState['viewType'],
-  maskedInputRef: React.MutableRefObject<HTMLInputElement | null>,
 }
 
 export interface EscKeyPressPayload {

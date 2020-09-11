@@ -338,7 +338,13 @@ export const createCalendarClickHandler = ({
   conditions,
 }: HandlersData): CalendarClickHandler => (type, ev, payload) => {
   const {
-    format = 'dd.MM.yyyy', onChange, name, min, max, type: componentType,
+    format = 'dd.MM.yyyy',
+    max,
+    min,
+    name,
+    onChange,
+    outputFormat,
+    type: componentType,
   } = props;
 
   const {
@@ -355,7 +361,7 @@ export const createCalendarClickHandler = ({
         component: {
           name,
           date: newDate,
-          value: formatDateTime(newDate, format) || '',
+          value: formatDateTime(newDate, outputFormat ?? format) || '',
         },
       });
     }

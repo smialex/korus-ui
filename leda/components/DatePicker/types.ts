@@ -32,6 +32,8 @@ export interface DatePickerProps extends DateTimeInputProps {
   onEnterPress?: (ev: ChangeEvent) => void,
   /** Функция обратного вызова при фокусе поля ввода */
   onFocus?: (ev: FocusEvent) => void,
+  /** Output value date format */
+  outputFormat?: string,
   /** Плейсхолдер для поля ввода */
   placeholder?: string,
   /** Реф */
