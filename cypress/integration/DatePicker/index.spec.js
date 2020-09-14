@@ -49,6 +49,16 @@ describe('DatePicker', () => {
         .blur()
         .should('have.attr', 'value', '11.01.2030');
     })
+
+    it('outputFormat', () => {
+      cy.name('outputFormatDatePicker')
+        .clear()
+        .type('{home}17081998')
+        .blur()
+        .should('have.attr', 'value', '17.08.1998');
+      cy.get('#value8Container')
+        .contains('17/08/1998');
+    });
   });
 
   describe('States', () => {
