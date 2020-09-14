@@ -10,7 +10,9 @@ export const DatePicker = (): React.ReactElement => {
   const [value5, setValue5] = React.useState('');
   const [value6, setValue6] = React.useState('');
   const [value7, setValue7] = React.useState('');
-  
+  const [date8, setDate8] = React.useState(new Date('04.12.2013'));
+  const [value8, setValue8] = React.useState('');
+
   const handleChange1 = (event) => {
     const { date, value } = event.component;
     setValue1(value);
@@ -43,6 +45,12 @@ export const DatePicker = (): React.ReactElement => {
   const handleChange7 = (event) => {
     const { date, value } = event.component;
     setValue7(value);
+    console.log(value, date);
+  };
+  const handleChange8 = (event) => {
+    const { date, value } = event.component;
+    setDate8(date);
+    setValue8(value);
     console.log(value, date);
   };
 
@@ -99,7 +107,7 @@ export const DatePicker = (): React.ReactElement => {
           value={value5}
           isDisabled
         />
-       
+
         <L.DatePicker
           max={new Date('05.04.2012')}
           min={new Date('05.03.2012')}
@@ -122,6 +130,18 @@ export const DatePicker = (): React.ReactElement => {
           name='CustomMonthsDatePicker'
           placeholder="Type your date..."
         />
+
+        <div>
+          <div id="value8Container">{value8}</div>
+          <L.DatePicker
+            format="dd.MM.yyyy"
+            name="outputFormatDatePicker"
+            onChange={handleChange8}
+            outputFormat="dd/MM/yyyy"
+            value={date8} // !IMPORTANT: use date as a value
+          />
+        </div>
+
          <L.Button _success>success!</L.Button>
       </L.Div>
     </L.Div>
