@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.30.0] - 2020-09-14
+
+### Added
+- RadioGroup: Added component to ev.form
+- Input: Added possibility to paste multiple times without replacing previous value
+- DatePicker: Added tests for monthNames, shortMonthNames, weekDayNames, shortWeekDayNames
+- DatePicker: Added tests for max, min attributes and onEnterPress event
+- Checkbox: Added tests checking that className attribute is passed to Wrapper, not LabelElement
+- DatePicker: Added possibility to pass custom month and week day name through props. New props: monthNames, shortMonthNames, weekDayNames, shortWeekDayNames.
+- Notifications: Pass removed notification as component.currentItem to onChange handler.
+
+### Fixed
+- Input: Focus input on clear button click.
+- MaskedInput: Fixed onPaste event handler, added tests
+
+
 ## [0.29.0] - 2020-08-31
 
 ### Added

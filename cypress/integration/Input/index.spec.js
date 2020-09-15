@@ -69,6 +69,16 @@ describe('Input', () => {
         .type('oklhdskjgfлдопрлдшп9304587230')
         .should('have.value', 'oklhdskjgfлдопрлдшп9304587230');
     });
+    it('Paste handler should add string to existing value, not replace it', () => {
+      cy.get('input#corr-Input')
+        .type('8888888')
+        .should('have.value', '8888888')
+        .get('input#corr-Input')
+        .paste('pasted')
+        .should('have.value', '8888888pasted')
+        .paste('pasted')
+        .should('have.value', '8888888pastedpasted')
+    });
     it('IsRequired should check if the field is required (highlight the field in red if nothing is entered and press the submit button)', () => {
       cy.get('input#checkDangerClass')
         .closest(`.${theme.inputWrapper}`)
@@ -115,6 +125,25 @@ describe('Input', () => {
         .get(`.${theme.inputWrapperInvalid}`)
         .next()
         .should('have.text', 'Поле обязательно!');
+    });
+    it('should clear input on clear button click', () => {
+      cy.get('input#hasClearButton')
+        .type('Clear me')
+        .blur()
+        .parent()
+        .get('.input-clear-icon')
+        .click()
+      cy.get('input#hasClearButton')
+        .should('have.value', '')
+    });
+    it('should focus input on clear button click', () => {
+      cy.get('input#hasClearButton')
+        .type('Clear me')
+        .blur()
+        .parent()
+        .get('.input-clear-icon')
+        .click()
+      cy.focused().should('have.attr', 'id', 'hasClearButton')
     });
   });
 });
