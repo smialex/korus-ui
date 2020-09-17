@@ -30,7 +30,7 @@ interface ControlledDropZoneProps {
 }
 
 export const ControlledDropZone = (props: ControlledDropZoneProps) => {
-  const [files, setFiles] = React.useState<{ acceptedFiles: any, rejectedFiles: any}>({ acceptedFiles: [], rejectedFiles: [] });
+  const [files, setFiles] = React.useState<L.DropZoneTypes.DropZoneFiles>({ acceptedFiles: [], rejectedFiles: [] });
 
   return (
     <L.Div _box _inner>
