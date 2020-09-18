@@ -2,6 +2,12 @@ import { globalDefaultTheme } from '../../../leda/components/LedaProvider';
 
 const theme = globalDefaultTheme.dropZone;
 
+const wrapperClassName = `.${theme.wrapper}`;
+
+const contentClassName = `.${theme.content}`;
+
+const fileDeleteIconClassName = `.${theme.fileDeleteIcon}`;
+
 const rejectedFilesWrapperClassNames = theme.rejectedFilesWrapper
   .split(' ')
   .map((className) => `.${className}`)
@@ -14,7 +20,7 @@ describe('DropZone', () => {
 
   describe('Display', () => {
     it('DropZone should be displayed', () => {
-      cy.get(`.${theme.wrapper}`)
+      cy.get(wrapperClassName)
         .should('have.length', 3)
         .each((wrapper) => {
           cy.wrap(wrapper).should('be.visible');
@@ -24,7 +30,7 @@ describe('DropZone', () => {
 
   describe('Interaction', () => {
     it('Should attach files to dropZone', () => {
-      cy.get(`.${theme.content}`)
+      cy.get(contentClassName)
         .first()
         .attachFile('example.json', { subjectType: 'drag-n-drop' })
         .attachFile('txtFile.txt', { subjectType: 'drag-n-drop' })
@@ -55,7 +61,7 @@ describe('DropZone', () => {
     });
 
     it('Should remove attached files', () => {
-      cy.get(`.${theme.fileDeleteIcon}`)
+      cy.get(fileDeleteIconClassName)
         .first()
         .click()
         .get(rejectedFilesWrapperClassNames)
@@ -67,7 +73,7 @@ describe('DropZone', () => {
         .first()
         .next()
         .contains('example.json')
-        .get(`.${theme.fileDeleteIcon}`)
+        .get(fileDeleteIconClassName)
         .first()
         .click()
         .get(rejectedFilesWrapperClassNames)
@@ -83,26 +89,26 @@ describe('DropZone', () => {
       cy.get('button')
         .contains('Submit')
         .click()
-        .get(`.${theme.wrapper}`)
+        .get(wrapperClassName)
         .eq(1)
         .should('have.class', theme.invalid)
-        .get(`.${theme.wrapper}`)
+        .get(wrapperClassName)
         .eq(1)
         .next()
         .contains('Files are required!');
     });
 
     it('Should be valid when isRequired and files are attached', () => {
-      cy.get(`.${theme.content}`)
+      cy.get(contentClassName)
         .eq(1)
         .attachFile('txtFile.txt', { subjectType: 'drag-n-drop' })
         .get('button')
         .contains('Submit')
         .click()
-        .get(`.${theme.wrapper}`)
+        .get(wrapperClassName)
         .eq(1)
         .should('not.have.class', theme.invalid)
-        .get(`.${theme.wrapper}`)
+        .get(wrapperClassName)
         .eq(1)
         .next()
         .contains('Files are required!')
@@ -117,17 +123,17 @@ describe('DropZone', () => {
           .eq(2)
           .next()
           .contains('external file')
-          .get(`.${theme.content}`)
+          .get(contentClassName)
           .eq(2)
           .attachFile('example.json', { subjectType: 'drag-n-drop' })
           .get(rejectedFilesWrapperClassNames)
           .eq(2)
           .next()
           .contains('example.json')
-          .get(`.${theme.fileDeleteIcon}`)
+          .get(fileDeleteIconClassName)
           .last()
           .click()
-          .get(`.${theme.fileDeleteIcon}`)
+          .get(fileDeleteIconClassName)
           .last()
           .click()
           .get(rejectedFilesWrapperClassNames)

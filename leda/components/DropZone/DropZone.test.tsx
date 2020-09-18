@@ -80,9 +80,9 @@ describe('DropZone HANDLERS', () => {
       }),
     });
 
-    const ui = <DropZone onChange={handleChange} />;
+    const component = <DropZone onChange={handleChange} />;
 
-    const { rerender, container, queryByText } = render(ui);
+    const { rerender, container, queryByText } = render(component);
 
     const dropZoneContent = container.querySelector('div.dropzone-content');
 
@@ -105,7 +105,7 @@ describe('DropZone HANDLERS', () => {
 
     fireEvent(dropZoneContent as Element, event);
 
-    await act(() => wait(() => rerender(ui)));
+    await act(() => wait(() => rerender(component)));
 
     expect(queryByText('file_1.txt')).toBeInTheDocument();
     expect(queryByText('file_2.pdf')).toBeInTheDocument();
